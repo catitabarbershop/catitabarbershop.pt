@@ -1,0 +1,191 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2.8rem;
+  color: #e63946;
+  text-shadow: 0 0 5px #e63946;
+}
+
+.imagem-barbeiro {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #1d3557;
+  margin: 20px auto;
+  display: block;
+  box-shadow: 0 0 15px #457b9d;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  margin: 0 auto 30px auto;
+  box-shadow: 0 0 15px #e63946;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  text-align: left;
+}
+
+/* Labels e inputs ocupam 100% da coluna */
+form label,
+form input[type="text"],
+form input[type="date"],
+form select {
+  width: 100%;
+  display: block;
+}
+
+/* Estilo dos labels */
+label {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #a8dadc;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+select {
+  padding: 8px 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.horario-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+select#hora, select#minutos {
+  flex: 1;
+}
+
+/* Botão ocupa as 3 colunas */
+button.botao-agendar {
+  grid-column: 1 / 4;
+  margin-top: 25px;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.botao-agendar:hover {
+  background-color: #d62828;
+}
+
+/* Nova coluna formas de pagamento */
+.formas-pagamento {
+  color: #a8dadc;
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.formas-pagamento p {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.icones-pagamento {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.icones-pagamento img {
+  height: 32px;
+  filter: invert(100%);
+}
+
+.nota-dinheiro {
+  font-size: 0.85rem;
+  color: #a8dadc;
+  font-style: italic;
+  margin-top: 0;
+}
+
+footer {
+  margin-top: auto;
+  padding-top: 15px;
+  font-size: 0.9rem;
+  color: #a8dadc;
+}
+
+footer a.instagram-link {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+footer img.instagram-icon {
+  width: 28px;
+  height: 28px;
+  filter: invert(100%);
+  transition: filter 0.3s ease;
+}
+
+footer img.instagram-icon:hover {
+  filter: invert(43%) sepia(89%) saturate(6232%) hue-rotate(332deg) brightness(102%) contrast(103%);
+}
+
+.nota {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #f1faee;
+  margin-top: 10px;
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 700px) {
+  form {
+    grid-template-columns: 1fr !important;
+  }
+  button.botao-agendar {
+    grid-column: 1;
+  }
+}
+
+
+

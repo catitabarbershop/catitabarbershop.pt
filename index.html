@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catita Barber Shop</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header {
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      color: #e63946;
+      text-shadow: 0 0 5px #e63946;
+    }
+
+    .imagem-barbeiro {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #1d3557;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 0 15px #457b9d;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      margin: 0 auto 30px auto;
+      box-shadow: 0 0 15px #e63946;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      text-align: left;
+    }
+
+    /* Labels e inputs ocupam 100% da coluna */
+    form label,
+    form input[type="text"],
+    form input[type="date"],
+    form select {
+      width: 100%;
+      display: block;
+    }
+
+    /* Estilo dos labels */
+    label {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #a8dadc;
+    }
+
+    /* Inputs */
+    input[type="text"],
+    input[type="date"],
+    select {
+      padding: 8px 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .horario-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    select#hora, select#minutos {
+      flex: 1;
+    }
+
+    /* Botão ocupa as 3 colunas */
+    button.botao-agendar {
+      grid-column: 1 / 4;
+      margin-top: 25px;
+      background-color: #e63946;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button.botao-agendar:hover {
+      background-color: #d62828;
+    }
+
+    /* Nova coluna formas de pagamento */
+    .formas-pagamento {
+      color: #a8dadc;
+      font-size: 1rem;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .formas-pagamento p {
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .icones-pagamento {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 5px;
+    }
+
+    .icones-pagamento img {
+      height: 32px;
+      filter: invert(100%);
+    }
+
+    .nota-dinheiro {
+      font-size: 0.85rem;
+      color: #a8dadc;
+      font-style: italic;
+      margin-top: 0;
+    }
+
+    footer {
+      margin-top: auto;
+      padding-top: 15px;
+      font-size: 0.9rem;
+      color: #a8dadc;
+    }
+
+    footer a.instagram-link {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    footer img.instagram-icon {
+      width: 28px;
+      height: 28px;
+      filter: invert(100%);
+      transition: filter 0.3s ease;
+    }
+
+    footer img.instagram-icon:hover {
+      filter: invert(43%) sepia(89%) saturate(6232%) hue-rotate(332deg) brightness(102%) contrast(103%);
+    }
+
+    .nota {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #f1faee;
+      margin-top: 10px;
+      grid-column: 1 / 4;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      form {
+        grid-template-columns: 1fr !important;
+      }
+      button.botao-agendar {
+        grid-column: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Catita Barber Shop</h1>
+  </header>
+
+  <img src="catita.jpg" alt="Barbeiro Catita" class="imagem-barbeiro" />
+
+  <form id="form-agenda" onsubmit="enviarParaWhatsApp(event)">
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+    </div>
+
+    <div>
+      <label for="data">Data:</label>
+      <input type="date" id="data" name="data" required />
+    </div>
+
+    <div>
+      <label>Horário:</label>
+      <div class="horario-container">
+        <select id="hora" name="hora" required>
+          <option value="">Hora</option>
+          <script>
+            for(let h=9; h<=20; h++) {
+              document.write(`<option value="${h.toString().padStart(2,'0')}">${h.toString().padStart(2,'0')}</option>`);
+            }
+          </script>
+        </select>
+        <select id="minutos" name="minutos" required>
+          <option value="">Minutos</option>
+          <option value="00">00</option>
+          <option value="15">15</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label for="servico">Serviço:</label>
+      <select id="servico" name="servico" required>
+        <option value="">-- Seleciona --</option>
+        <option>Corte Masculino</option>
+        <option>Barba Completa</option>
+        <option>Corte + Barba</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="barbeiro">Barbeiro:</label>
+      <input type="text"id="barbeiro"name="barbeiro"placeholder="Nome do Barbeiro" required />
+    
+ 
+      </select>
+    </div>
+
+    <!-- Nova coluna para formas de pagamento -->
+    <div class="formas-pagamento">
+      <p>Formas de pagamento:</p>
+      <div class="icones-pagamento">
+        <img src="mbway.png" alt="MB Way" />
+        <img src="visa.png" alt="Visa" />
+        <img src="dinheiro.png" alt="Dinheiro" />
+      </div>
+      <p class="nota-dinheiro">Dinheiro</p>
+    </div>
+
+    <button type="submit" class="botao-agendar">Enviar para WhatsApp</button>
+  </form>
+
+  <p class="nota">*Marque com antecedência para ser possível efetuar o seu pedido.</p>
+
+  <footer>
+    <p>&copy; Catita Barber Shop - Todos os direitos reservados.</p>
+    <a href="https://instagram.com/catitathebarber" target="_blank" class="instagram-link" aria-label="Instagram Catita Barber Shop">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="instagram-icon" />
+    </a>
+  </footer>
+
+  <script>
+    function enviarParaWhatsApp(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const data = document.getElementById("data").value;
+      const hora = document.getElementById("hora").value;
+      const minutos = document.getElementById("minutos").value;
+      const servico = document.getElementById("servico").value;
+      const barbeiro = document.getElementById("barbeiro").value;
+
+      if (!nome || !data || !hora || !minutos || !servico || !barbeiro) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      const horaNum = parseInt(hora, 10);
+      const minNum = parseInt(minutos, 10);
+      if (horaNum < 9 || (horaNum === 20 && minNum > 30) || horaNum > 20) {
+        alert("Por favor, selecione um horário entre 09:00 e 20:30.");
+        return;
+      }
+
+      const horaCompleta = `${hora}:${minutos}`;
+      const mensagem = `Olá! Gostaria de fazer um agendamento para este horário:\n\nNome: ${nome}\nData: ${data}\nHora: ${horaCompleta}\nServiço: ${servico}\nBarbeiro: ${barbeiro}`;
+      const numero = "351965521751";
+
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
